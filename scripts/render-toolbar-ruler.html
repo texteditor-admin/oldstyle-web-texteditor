@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Toolbar and Ruler Showcase</title>
+  <link rel="stylesheet" href="../dist/oldstyle-web-texteditor.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      overflow: hidden;
+    }
+    #capture-wrapper {
+      width: 1040px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      overflow: hidden;
+    }
+    /* Hide the scrollArea and editable for toolbar capture only */
+    #editor .rye-main-area {
+      display: none !important;
+    }
+    #editor .rye-status-bar {
+      display: none !important;
+    }
+    #editor .rye-container {
+      border: none !important;
+      border-radius: 0 !important;
+      height: auto !important;
+      box-shadow: none !important;
+    }
+  </style>
+</head>
+<body>
+
+<div id="capture-wrapper">
+  <div id="editor"></div>
+</div>
+
+<script src="../dist/oldstyle-web-texteditor.umd.js"></script>
+<script>
+  ResmiYaziEditor.create('#editor', {
+    pageMargin: '1.5cm 1.5cm 0.5cm 1.5cm',
+    lineHeight: '1.15',
+    paragraphSpacing: '0pt',
+    firstLineIndent: '1.25cm'
+  }).then(editor => {
+    // Show ruler line badge
+    const badge = editor.container.querySelector('.rye-ruler-line-badge');
+    if (badge) {
+      badge.textContent = 'Satır 1: 1.25 cm (İlk Satır Girintisi)';
+      badge.style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>

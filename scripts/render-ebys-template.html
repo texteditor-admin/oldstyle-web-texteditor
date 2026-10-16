@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>EBYS Template Showcase</title>
+  <link rel="stylesheet" href="../dist/oldstyle-web-texteditor.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #7c98b3;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      overflow: hidden;
+    }
+    #capture-wrapper {
+      width: 1040px;
+      margin: 0 auto;
+      background: #ffffff;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+      border: 1px solid #cbd5e1;
+      height: 1480px;
+      overflow: hidden;
+    }
+    #editor {
+      height: 100%;
+    }
+    .rye-container {
+      height: 100% !important;
+    }
+    .rye-scroll-area {
+      height: calc(100% - 150px) !important;
+      background: #7c98b3 !important;
+      padding: 24px 0 !important;
+    }
+    .rye-page {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2) !important;
+      margin: 0 auto !important;
+    }
+    .template-token {
+      font-family: "Courier New", Courier, monospace;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .template-token-red {
+      font-family: "Courier New", Courier, monospace;
+      font-weight: bold;
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+
+<div id="capture-wrapper">
+  <div id="editor"></div>
+</div>
+
+<script src="../dist/oldstyle-web-texteditor.umd.js"></script>
+<script>
+  const templateHtml = `
+    <p style="text-align: center; font-weight: bold; margin-bottom: 14pt;">
+      T.C.<br>
+      <span class="template-token">{{Belge.EbysKurumAdi}}</span><br>
+      <span class="template-token">{{Belge.YaziBasligi}}</span>
+    </p>
+
+    <div style="text-align: right; margin-bottom: 8pt;">
+      <span class="template-token-red">{{Belge.OncelikDerecesi}}</span>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; margin-bottom: 8pt;">
+      <span><strong>Sayı :</strong> <span class="template-token">{{Belge.Sayi}}</span></span>
+      <span class="template-token">{{Belge.Tarih}}</span>
+    </div>
+    <p style="margin-bottom: 12pt;"><strong>Konu :</strong> <span class="template-token">{{Belge.KonuMetni}}</span></p>
+
+    <p style="text-align: center; margin: 14pt 0 12pt 0;">
+      <span class="template-token">{{Belge.KonuGittigiYerArasiBoslukSatirlari}}</span><br>
+      <strong class="template-token">{{Belge.Muhatap}}</strong>
+    </p>
+
+    <p style="margin-bottom: 10pt;"><strong>İlgi :</strong> <span class="template-token">{{Belge.IlgiMetni}}</span></p>
+
+    <div style="border-top: 2px dashed #dc2626; margin: 14pt 0; position: relative;">
+      <span style="position: absolute; right: 0; top: -10px; background: #dc2626; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 3px; font-weight: bold;">↵ Sayfa Sonu (Page Break)</span>
+    </div>
+
+    <p style="text-indent: 1.25cm; text-align: justify; line-height: 1.15; margin-bottom: 12pt;">
+      <span class="template-token">{{Belge.Icerik}}</span>
+    </p>
+
+    <p style="text-align: center; margin: 10pt 0;">
+      <span class="template-token">{{Belge.IcerikImzaArasiBoslukSatirlari}}</span>
+    </p>
+
+    <table style="width: 100%; border: none; margin-top: 18pt; text-align: center;">
+      <tr>
+        <td style="border: none; padding: 4px; width: 33%;"><strong>İmza</strong></td>
+        <td style="border: none; padding: 4px; width: 33%;"><strong>İmza</strong></td>
+        <td style="border: none; padding: 4px; width: 33%;"><strong>İmza</strong></td>
+      </tr>
+      <tr>
+        <td style="border: none; padding: 4px;"><span class="template-token">{{Belge.ImzaMetinleri[2]}}</span></td>
+        <td style="border: none; padding: 4px;"><span class="template-token">{{Belge.ImzaMetinleri[1]}}</span></td>
+        <td style="border: none; padding: 4px;"><span class="template-token">{{Belge.ImzaMetinleri[0]}}</span></td>
+      </tr>
+    </table>
+
+    <div style="margin-top: 18pt; font-size: 10pt;">
+      <strong>Ek :</strong> <span class="template-token">{{Belge.EkIcerik}}</span>
+    </div>
+  `;
+
+  ResmiYaziEditor.create('#editor', {
+    initialData: templateHtml,
+    pageMargin: '1.5cm 1.5cm 0.5cm 1.5cm',
+    lineHeight: '1.15',
+    paragraphSpacing: '0pt',
+    firstLineIndent: '1.25cm'
+  }).then(editor => {
+    const badge = editor.container.querySelector('.rye-ruler-line-badge');
+    if (badge) {
+      badge.textContent = 'Şablon Modu: {{Değişkenler}} Aktif';
+      badge.style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>

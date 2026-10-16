@@ -15,17 +15,30 @@
 
 <div align="center">
 
-### 🎗️ Word Şeridi (Ribbon), Menü Çubuğu ve İnteraktif Cetvel
+### 🎗️ 1. Modern Word Şeridi (Ribbon), Menü Çubuğu ve İnteraktif Cetvel
+*Tam teşekküllü üst menü çubuğu, EBYS/UYAP disket ve yazdırma araçları, serbest tablo ızgarası, biçimlendirme araçları, görünüm/küçük resimler kontrolü ve 1.25 cm ilk satır girintisini dinamik gösteren akıllı yatay cetvel.*
+
 ![Word Şeridi ve Cetvel](docs/assets/toolbar-ruler.png)
 
 <br/>
 
-### 📄 Gerçek Fiziksel Çok Sayfalı A4 Kağıt Motoru & Bağımsız Satır Hizalama
+### 📄 2. Gerçek Fiziksel Çok Sayfalı A4 Kağıt Motoru & Resmi Yazı Düzeni
+*210 × 297 mm gerçek A4 boyutlandırması, T.C. Cumhurbaşkanlığı 2025 Yönetmeliği (8. Madde) ile tam uyumlu 1.5 cm kenar boşlukları, 18 cm yazı alanı, iki yana yaslı 1.25 cm paragraflar, kurumsal tablolar ve e-imza blokları.*
+
 ![A4 Kağıt ve Sayfalama](docs/assets/editor-preview.png)
 
 <br/>
 
-### 🏛️ T.C. Cumhurbaşkanlığı 2025 Resmî Yazışma Yönetmeliği (8. Madde) Standartları
+### 📋 3. EBYS Kurumsal Şablonlama & Değişken (Token / Placeholder) Desteği
+*Kamu ve belediye EBYS sistemlerindeki dinamik değişkenler (`{{Belge.Sayi}}`, `{{Belge.Muhatap}}`, `{{Belge.Icerik}}`), kırmızı öncelik derecesi ve kırmızı kesikli sayfa sonu (`Page Break`) çizgisi birebir desteklenir; backend şablon motorları ile %100 uyumludur.*
+
+![EBYS Şablonlama Desteği](docs/assets/ebys-template-showcase.png)
+
+<br/>
+
+### 🏛️ 4. T.C. Cumhurbaşkanlığı 2025 Resmî Yazışma Yönetmeliği (8. Madde) Standartları
+*Yönetmelikte belirtilen 1.5 cm üst/sol/sağ, 0.5 cm alt boşluk ve Times New Roman 1.15 satır aralığı standartlarının teknik doğrulaması.*
+
 ![Resmi Yazışma Standardı](docs/assets/resmi-yazisma-standardi.jpg)
 
 </div>
@@ -225,7 +238,7 @@ oldstyle-web-texteditor/
 │   ├── plugins/                            # Word (.docx) Import/Export, Tablo, Resim
 │   ├── ui/                                 # Araç Çubuğu, Cetvel (Ruler), Bul/Değiştir
 │   └── utils/                              # PrintManager, DOM yardımcıları
-├── scripts/                                # 15 adet otomatik doğrulama test paketi
+├── scripts/                                # 16 adet otomatik doğrulama test paketi
 ├── package.json                            # Paket yapılandırması
 ├── tsconfig.json                           # TypeScript konfigürasyonu
 └── vite.config.ts                          # Vite derleme ayarları
@@ -235,12 +248,13 @@ oldstyle-web-texteditor/
 
 ## 🧪 Testler ve Kalite Güvencesi
 
-Proje bünyesinde 15 adet kapsamlı uçtan uca doğrulama testi yer alır:
+Proje bünyesinde 16 adet kapsamlı uçtan uca doğrulama testi yer alır:
 
 ```bash
 npm test
 ```
 
+- ✅ 11 Adet Klavye Kısayolu ve Tarayıcı Çakışma Önleme Doğrulaması (11/11 Test)
 - ✅ CKEditor 4 & Olgu EBYS Adaptör Doğrulaması (9/9 Test)
 - ✅ İzole A4 Baskı & Yazdırma Testleri (6/6 Test)
 - ✅ 2025 Cumhurbaşkanlığı Resmî Yazışma Kılavuzu ve Yönetmeliği Standartları
