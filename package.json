@@ -19,7 +19,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc --emitDeclarationOnly",
-    "test": "node scripts/verify-all-font-operations.cjs && node scripts/verify-toolbar-panel.cjs && node scripts/verify-format-painter.cjs && node scripts/verify-bold-toggle-and-import.cjs && node scripts/verify-import-export-fidelity.cjs && node scripts/test-import-pagination.cjs && node scripts/verify-full-toolbar-layout.cjs && node scripts/verify-word-export-fidelity.cjs && node scripts/verify-ruler-table-print-fixes.cjs && node scripts/verify-ckeditor-ebys-shim.cjs && node scripts/verify-isolated-print.cjs && node scripts/verify-indent-outdent.cjs && node scripts/verify-2025-regulation-standards.cjs && node scripts/verify-free-line-spacing.cjs && node scripts/verify-ruler-line-alignment.cjs",
+    "test": "node scripts/verify-all-font-operations.cjs && node scripts/verify-toolbar-panel.cjs && node scripts/verify-format-painter.cjs && node scripts/verify-bold-toggle-and-import.cjs && node scripts/verify-import-export-fidelity.cjs && node scripts/test-import-pagination.cjs && node scripts/verify-full-toolbar-layout.cjs && node scripts/verify-word-export-fidelity.cjs && node scripts/verify-ruler-table-print-fixes.cjs && node scripts/verify-ckeditor-ebys-shim.cjs && node scripts/verify-isolated-print.cjs && node scripts/verify-indent-outdent.cjs && node scripts/verify-2025-regulation-standards.cjs && node scripts/verify-free-line-spacing.cjs && node scripts/verify-ruler-line-alignment.cjs && node scripts/test-all-keyboard-shortcuts.cjs",
     "preview": "vite preview"
   },
   "keywords": [

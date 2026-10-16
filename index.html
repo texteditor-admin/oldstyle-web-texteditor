@@ -227,13 +227,29 @@
   <!-- Sekmeler -->
   <div class="card">
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('modal')">1. Tam Ekran Modal Modu (Word Pop-up)</button>
-      <button class="tab-btn" onclick="switchTab('embedded')">2. Sayfa İçi Gömülü Mod (A4 Kağıdı)</button>
+      <button class="tab-btn active" onclick="switchTab('embedded')">1. Sayfa İçi Canlı A4 Editörü (Canlı Düzenleme)</button>
+      <button class="tab-btn" onclick="switchTab('modal')">2. Tam Ekran Modal Modu (Word Pop-up)</button>
     </div>
 
-    <!-- TAB 1: MODAL -->
-    <div id="tab-modal" class="tab-content active">
-      <h3 style="margin-top: 0;">Belge Önizleme Kutusu</h3>
+    <!-- TAB 1: GÖMÜLÜ A4 SAYFASI (VARSAYILAN AKTİF) -->
+    <div id="tab-embedded" class="tab-content active">
+      <h3 style="margin-top: 0;">Sayfaya Doğrudan Gömülü A4 Düzenleyici</h3>
+      <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
+        Aşağıdaki A4 kağıdı üzerinde tüm kısayolları (<strong>Ctrl+B</strong>, <strong>Ctrl+I</strong>, <strong>Ctrl+U</strong>, <strong>Ctrl+Z</strong>, <strong>Ctrl+Y</strong>, <strong>Ctrl+F</strong>, <strong>Ctrl+P</strong>, <strong>Ctrl+S</strong>, <strong>Ctrl+Enter</strong>, <strong>Tab</strong>, <strong>Shift+Tab</strong>) doğrudan deneyebilirsiniz. Masaüstünüzden bir <strong>.docx</strong>, <strong>.doc</strong>, <strong>.html</strong> veya resim dosyasını da sürükleyip bırakabilirsiniz!
+      </p>
+
+      <div id="embeddedEditorContainer">
+        <div id="embeddedEditor">
+          <p style="text-align: center; font-weight: bold; font-size: 14pt;">T.C. BAKANLIK RESMİ YAZISI</p>
+          <p>Bu metin doğrudan sayfaya gömülü A4 kağıt üzerinde düzenlenmektedir. Times New Roman fontu, 1.15 satır aralığı, 1.5 cm kenar boşlukları ve 1.25 cm ilk satır girintisi ile Resmi Yazışma Yönetmeliğine tam uyumludur.</p>
+          <p>Klavyenizden <strong>Ctrl+B</strong> ile kalınlaştırabilir, <strong>Ctrl+I</strong> ile italik yapabilir, <strong>Ctrl+U</strong> ile altını çizebilir, <strong>Ctrl+F</strong> ile arama kutusunu açabilir, <strong>Ctrl+P</strong> ile yazdırabilir, <strong>Ctrl+S</strong> ile kaydedebilir, <strong>Ctrl+Enter</strong> ile yeni A4 sayfası açabilir, <strong>Tab</strong> ve <strong>Shift+Tab</strong> ile resmi girinti verebilirsiniz.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: MODAL -->
+    <div id="tab-modal" class="tab-content">
+      <h3 style="margin-top: 0;">Belge Önizleme Kutusu (Modal Testi)</h3>
       <div id="contentPreview" class="preview-box">
         <p style="text-align: center; font-weight: bold; margin-bottom: 20pt;">
           T.C.<br>
@@ -260,22 +276,6 @@
       </div>
     </div>
 
-    <!-- TAB 2: GÖMÜLÜ A4 SAYFASI -->
-    <div id="tab-embedded" class="tab-content">
-      <h3 style="margin-top: 0;">Sayfaya Doğrudan Gömülü A4 Düzenleyici</h3>
-      <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
-        Masaüstünüzden bir <strong>.docx</strong>, <strong>.doc</strong>, <strong>.html</strong> veya resim dosyasını doğrudan aşağıdaki A4 kağıdına sürükleyip bırakabilirsiniz!
-      </p>
-
-      <div id="embeddedEditorContainer">
-        <div id="embeddedEditor">
-          <p style="text-align: center; font-weight: bold; font-size: 14pt;">T.C. BAKANLIK RESMİ YAZISI</p>
-          <p>Bu metin doğrudan sayfaya gömülü A4 kağıt üzerinde düzenlenmektedir. Times New Roman fontu, 1.15 satır aralığı, 1.5 cm kenar boşlukları ve 1.25 cm ilk satır girintisi ile Resmi Yazışma Yönetmeliğine tam uyumludur.</p>
-          <p>Araç çubuğundaki <strong>Tablo</strong> ikonundan 8x8 ızgara ile tablo ekleyebilir, <strong>Görsel</strong> butonundan resim yükleyebilir, <strong>Word İçe Aktar</strong> butonuyla mevcut .docx ve .doc belgelerinizi yükleyebilirsiniz.</p>
-        </div>
-      </div>
-    </div>
-
   </div>
 
 </div>
@@ -284,26 +284,15 @@
 <script src="./dist/oldstyle-web-texteditor.umd.js"></script>
 
 <script>
-  // 1. MODAL BAŞLATICI
-  const modalLauncher = ResmiYaziEditor.createModal({
-    trigger: '#openModalBtn',
-    preview: '#contentPreview',
-    title: 'Resmi Yazışma Belge Düzenleyici',
-    saveKey: 'resmiYaziDemoKey',
-    onSave: function(html) {
-      alert('✅ Belge başarıyla kaydedildi!');
-    }
-  });
-
-  // 2. GÖMÜLÜ EDİTÖR BAŞLATICI
+  // 1. GÖMÜLÜ EDİTÖRÜ SAYFA AÇILIR AÇILMAZ BAŞLAT
   let embeddedEditorInstance = null;
   function initEmbeddedEditor() {
     if (!embeddedEditorInstance) {
       ResmiYaziEditor.create('#embeddedEditor', {
         placeholder: 'Yazınızı buraya yazın...',
-        pageMargin: '2.5cm',
-        lineHeight: '1.5',
-        paragraphSpacing: '12pt',
+        pageMargin: '1.5cm 1.5cm 0.5cm 1.5cm',
+        lineHeight: '1.15',
+        paragraphSpacing: '0pt',
         firstLineIndent: '1.25cm',
         collaboration: {
           roomId: 'resmi-yazi-genel-oda',
@@ -315,23 +304,44 @@
         }
       }).then(editor => {
         embeddedEditorInstance = editor;
-        console.log('Gömülü editör ve gerçek zamanlı işbirliği hazır:', editor);
+        console.log('Canlı A4 Editörü hazır:', editor);
+        editor.on('save', function(data) {
+          console.log('Belge kaydedildi:', data);
+        });
       });
     }
   }
+
+  // Sayfa yüklendiğinde gömülü canlı editörü hemen başlat
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEmbeddedEditor);
+  } else {
+    initEmbeddedEditor();
+  }
+
+  // 2. MODAL BAŞLATICI
+  const modalLauncher = ResmiYaziEditor.createModal({
+    trigger: '#openModalBtn',
+    preview: '#contentPreview',
+    title: 'Resmi Yazışma Belge Düzenleyici',
+    saveKey: 'resmiYaziDemoKey',
+    onSave: function(html) {
+      alert('✅ Belge başarıyla kaydedildi!');
+    }
+  });
 
   // Sekme değiştirici
   function switchTab(tab) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
-    if (tab === 'modal') {
+    if (tab === 'embedded') {
       document.querySelectorAll('.tab-btn')[0].classList.add('active');
-      document.getElementById('tab-modal').classList.add('active');
-    } else if (tab === 'embedded') {
-      document.querySelectorAll('.tab-btn')[1].classList.add('active');
       document.getElementById('tab-embedded').classList.add('active');
       initEmbeddedEditor();
+    } else if (tab === 'modal') {
+      document.querySelectorAll('.tab-btn')[1].classList.add('active');
+      document.getElementById('tab-modal').classList.add('active');
     }
   }
 

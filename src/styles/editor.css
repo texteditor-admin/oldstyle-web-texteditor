@@ -1669,3 +1669,29 @@
   width: 100%;
 }
 
+/* --------------------------------------------------------------------------
+   Bildirim / Toast Stili (Ctrl+S, Ctrl+Enter vb. için)
+   -------------------------------------------------------------------------- */
+.rye-toast-notification {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(15, 23, 42, 0.94);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  z-index: 99999;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+.rye-toast-notification.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+

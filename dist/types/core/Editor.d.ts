@@ -19,6 +19,7 @@ export interface EditorConfig {
 }
 export declare class ResmiYaziEditor extends Emitter {
     static lastActiveInstance: ResmiYaziEditor | null;
+    private static isGlobalListenerAttached;
     state: 'initializing' | 'ready' | 'destroyed';
     isReadOnly: boolean;
     container: HTMLElement;
@@ -44,6 +45,19 @@ export declare class ResmiYaziEditor extends Emitter {
     constructor(target: HTMLElement, config?: EditorConfig);
     private mount;
     private setupListeners;
+    /**
+     * Klavyeden gelen tüm kısayolları ve özel tuşları (Tab, Ctrl+B, Ctrl+I, Ctrl+U, Ctrl+Z, Ctrl+Y, Ctrl+F, Ctrl+P, Ctrl+S, Ctrl+Enter)
+     * tarayıcı çakışmalarını engelleyerek (e.preventDefault & capture) yürütür.
+     */
+    handleKeyDown(e: KeyboardEvent): boolean;
+    /**
+     * İmlecin bulunduğu noktaya doğrudan bölünemez boşluk veya metin ekler.
+     */
+    insertDirectText(text: string): void;
+    /**
+     * Editör üzerinde kullanıcıya şık ve hafif bir bildirim (Toast) gösterir.
+     */
+    showToast(message: string, duration?: number): void;
     private onContentChange;
     private toggleSourceMode;
     static create(target: string | HTMLElement, options?: EditorConfig): Promise<ResmiYaziEditor>;
