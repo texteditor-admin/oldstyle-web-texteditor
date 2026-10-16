@@ -29,14 +29,7 @@
 
 <br/>
 
-### 📋 3. EBYS Kurumsal Şablonlama & Değişken (Token / Placeholder) Desteği
-*Kamu ve belediye EBYS sistemlerindeki dinamik değişkenler (`{{Belge.Sayi}}`, `{{Belge.Muhatap}}`, `{{Belge.Icerik}}`), kırmızı öncelik derecesi ve kırmızı kesikli sayfa sonu (`Page Break`) çizgisi birebir desteklenir; backend şablon motorları ile %100 uyumludur.*
-
-![EBYS Şablonlama Desteği](docs/assets/ebys-template-showcase.png)
-
-<br/>
-
-### 🏛️ 4. T.C. Cumhurbaşkanlığı 2025 Resmî Yazışma Yönetmeliği (8. Madde) Standartları
+### 🏛️ 3. T.C. Cumhurbaşkanlığı 2025 Resmî Yazışma Yönetmeliği (8. Madde) Standartları
 *Yönetmelikte belirtilen 1.5 cm üst/sol/sağ, 0.5 cm alt boşluk ve Times New Roman 1.15 satır aralığı standartlarının teknik doğrulaması.*
 
 ![Resmi Yazışma Standardı](docs/assets/resmi-yazisma-standardi.jpg)
