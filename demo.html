@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>OldStyle Web Text Editor - Word & A4 Resmi Yazışma Editörü</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Sadece 1 CSS dosyası -->
+  <link rel="stylesheet" href="./dist/oldstyle-web-texteditor.css">
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: #ffffff;
+      padding: 20px 32px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    header p {
+      margin: 4px 0 0 0;
+      opacity: 0.9;
+      font-size: 13px;
+    }
+    .collab-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+    .collab-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+    }
+    .main-container {
+      max-width: 1040px;
+      margin: 28px auto;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .feature-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+    .preview-box {
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 24px;
+      min-height: 160px;
+      background: #ffffff;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 12pt;
+      line-height: 1.5;
+    }
+    .preview-box p {
+      margin: 0 0 12pt 0;
+      text-indent: 1.25cm;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      border-radius: 6px;
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #334155;
+    }
+    .btn-secondary:hover {
+      background: #cbd5e1;
+    }
+    .btn-success {
+      background: #16a34a;
+      color: #ffffff;
+    }
+    .btn-success:hover {
+      background: #15803d;
+    }
+    .actions-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .actions-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all .15s;
+    }
+    .tab-btn.active {
+      color: var(--primary);
+      background: #eff6ff;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    #embeddedEditorContainer {
+      height: 720px;
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>📄 Resmi Yazışma Editörü</h1>
+    <p>Bağımsız Word A4 Editörü (Tablo, Resim, Word/PDF Export, Word Import & Gerçek Zamanlı Ortak Çalışma)</p>
+  </div>
+  <div class="collab-status">
+    <div class="collab-dot"></div>
+    <span>Gerçek Zamanlı Senkronizasyon Aktif</span>
+  </div>
+</header>
+
+<div class="main-container">
+
+  <!-- Eklenen Tüm Özelliklerin Özeti -->
+  <div class="card">
+    <h3 style="margin-top: 0; font-size: 16px;">🚀 Tamamlanan Gelişmiş Özellikler</h3>
+    <div class="features-grid">
+      <div class="feature-item">🎗️ <strong>Word Şeridi (Ribbon):</strong> Pano, Yazı Tipi, Paragraf & K/T/A ikonları</div>
+      <div class="feature-item">📊 <strong>Tablo:</strong> 8x8 Hover Grid & Satır/Sütun</div>
+      <div class="feature-item">🖼️ <strong>Resim:</strong> Yükle, URL, Sürükle-Bırak</div>
+      <div class="feature-item">☑️ <strong>Liste:</strong> Madde, Numara, Checklist</div>
+      <div class="feature-item">🔍 <strong>Bul / Değiştir:</strong> Dahili arama aracı</div>
+      <div class="feature-item">§ <strong>Özel Simgeler:</strong> Madde (§), ₺, Para, Matematik</div>
+      <div class="feature-item">📥 <strong>İçe Aktar (Import):</strong> .docx & .doc Word, HTML, TXT</div>
+      <div class="feature-item">📄 <strong>Word İndir (Export):</strong> Tam formatlı .docx</div>
+      <div class="feature-item">🖨️ <strong>PDF / Yazdır:</strong> Standart A4 Baskı</div>
+      <div class="feature-item">👥 <strong>Canlı İşbirliği:</strong> Sekmeler arası anlık sync</div>
+      <div class="feature-item">💻 <strong>HTML Kaynak:</strong> Çift yönlü kod modu</div>
+    </div>
+  </div>
+
+  <!-- Sekmeler -->
+  <div class="card">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('modal')">1. Tam Ekran Modal Modu (Word Pop-up)</button>
+      <button class="tab-btn" onclick="switchTab('embedded')">2. Sayfa İçi Gömülü Mod (A4 Kağıdı)</button>
+    </div>
+
+    <!-- TAB 1: MODAL -->
+    <div id="tab-modal" class="tab-content active">
+      <h3 style="margin-top: 0;">Belge Önizleme Kutusu</h3>
+      <div id="contentPreview" class="preview-box">
+        <p style="text-align: center; font-weight: bold; margin-bottom: 20pt;">
+          T.C.<br>
+          İÇİŞLERİ BAKANLIĞI<br>
+          Bilgi Teknolojileri Genel Müdürlüğü
+        </p>
+        <p><strong>Sayı :</strong> E-12345678-700-001<br>
+        <strong>Konu :</strong> Resmi Yazışma Sistemi Entegrasyonu</p>
+        <p style="text-align: center; font-weight: bold; margin: 16pt 0;">DAĞITIM YERLERİNE</p>
+        <p>Cumhurbaşkanlığı Resmi Yazışmalarda Uygulanacak Usul ve Esaslar Hakkında Yönetmelik hükümlerine uygun olarak hazırlanan bu sistem, harici hiçbir kütüphaneye ihtiyaç duymaksızın doğrudan web sayfalarına entegre edilebilmektedir.</p>
+        <p>Word (.docx ve .doc) belgeleri doğrudan editöre aktarılabilmekte, Word (.docx) ve PDF formatlarında standartlara uygun şekilde dışa aktarılabilmektedir.</p>
+        <p>Gereğini ve bilgilerinizi arz/rica ederim.</p>
+      </div>
+
+      <div class="actions-bar">
+        <div class="actions-group">
+          <button class="btn btn-secondary" onclick="exportWordFromPreview()">
+            📄 Önizlemeyi Word İndir (.docx)
+          </button>
+        </div>
+        <button class="btn btn-primary" id="openModalBtn">
+          ✏️ Belgeyi Düzenle (Tam Ekran Word)
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB 2: GÖMÜLÜ A4 SAYFASI -->
+    <div id="tab-embedded" class="tab-content">
+      <h3 style="margin-top: 0;">Sayfaya Doğrudan Gömülü A4 Düzenleyici</h3>
+      <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
+        Masaüstünüzden bir <strong>.docx</strong>, <strong>.doc</strong>, <strong>.html</strong> veya resim dosyasını doğrudan aşağıdaki A4 kağıdına sürükleyip bırakabilirsiniz!
+      </p>
+
+      <div id="embeddedEditorContainer">
+        <div id="embeddedEditor">
+          <p style="text-align: center; font-weight: bold; font-size: 14pt;">T.C. BAKANLIK RESMİ YAZISI</p>
+          <p>Bu metin doğrudan sayfaya gömülü A4 kağıt üzerinde düzenlenmektedir. Times New Roman fontu, 1.5 satır aralığı ve 1.25 cm ilk satır girintisi ile Resmi Yazışma Yönetmeliğine tam uyumludur.</p>
+          <p>Araç çubuğundaki <strong>Tablo</strong> ikonundan 8x8 ızgara ile tablo ekleyebilir, <strong>Görsel</strong> butonundan resim yükleyebilir, <strong>Word İçe Aktar</strong> butonuyla mevcut .docx ve .doc belgelerinizi yükleyebilirsiniz.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Sadece 1 JS dosyası (Tüm özellikler içinde derlenmiştir: Mammoth, Tablo, Export, Collab, vb.) -->
+<script src="./dist/oldstyle-web-texteditor.umd.js"></script>
+
+<script>
+  // 1. MODAL BAŞLATICI
+  const modalLauncher = ResmiYaziEditor.createModal({
+    trigger: '#openModalBtn',
+    preview: '#contentPreview',
+    title: 'Resmi Yazışma Belge Düzenleyici',
+    saveKey: 'resmiYaziDemoKey',
+    onSave: function(html) {
+      alert('✅ Belge başarıyla kaydedildi!');
+    }
+  });
+
+  // 2. GÖMÜLÜ EDİTÖR BAŞLATICI
+  let embeddedEditorInstance = null;
+  function initEmbeddedEditor() {
+    if (!embeddedEditorInstance) {
+      ResmiYaziEditor.create('#embeddedEditor', {
+        placeholder: 'Yazınızı buraya yazın...',
+        pageMargin: '2.5cm',
+        lineHeight: '1.5',
+        paragraphSpacing: '12pt',
+        firstLineIndent: '1.25cm',
+        collaboration: {
+          roomId: 'resmi-yazi-genel-oda',
+          user: {
+            id: 'usr_' + Math.floor(Math.random() * 1000),
+            name: 'Kullanıcı ' + Math.floor(Math.random() * 100),
+            color: '#2563eb'
+          }
+        }
+      }).then(editor => {
+        embeddedEditorInstance = editor;
+        console.log('Gömülü editör ve gerçek zamanlı işbirliği hazır:', editor);
+      });
+    }
+  }
+
+  // Sekme değiştirici
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+    if (tab === 'modal') {
+      document.querySelectorAll('.tab-btn')[0].classList.add('active');
+      document.getElementById('tab-modal').classList.add('active');
+    } else {
+      document.querySelectorAll('.tab-btn')[1].classList.add('active');
+      document.getElementById('tab-embedded').classList.add('active');
+      initEmbeddedEditor();
+    }
+  }
+
+  // Önizlemeyi Word Olarak İndirme
+  function exportWordFromPreview() {
+    const html = document.getElementById('contentPreview').innerHTML;
+    ResmiYaziEditor.ExportPlugin.exportToWord(html, 'resmi_yazi_onizleme.docx');
+  }
+</script>
+
+</body>
+</html>

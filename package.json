@@ -1,0 +1,51 @@
+{
+  "name": "oldstyle-web-texteditor",
+  "version": "1.0.0",
+  "description": "OldStyle Web Text Editor - High-fidelity Word & A4 rich-text editor engine with drop-in CKEditor 4 socketing adapter for Kendo UI, Metronic, EBYS and modern SPAs",
+  "type": "module",
+  "main": "./dist/oldstyle-web-texteditor.umd.js",
+  "module": "./dist/oldstyle-web-texteditor.es.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/oldstyle-web-texteditor.es.js",
+      "require": "./dist/oldstyle-web-texteditor.umd.js"
+    },
+    "./dist/oldstyle-web-texteditor.css": "./dist/oldstyle-web-texteditor.css",
+    "./dist/resmi-yazi-editor.umd.js": "./dist/resmi-yazi-editor.umd.js",
+    "./dist/resmi-yazi-editor.es.js": "./dist/resmi-yazi-editor.es.js",
+    "./dist/resmi-yazi-editor.css": "./dist/resmi-yazi-editor.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc --emitDeclarationOnly",
+    "test": "node scripts/verify-all-font-operations.cjs && node scripts/verify-toolbar-panel.cjs && node scripts/verify-format-painter.cjs && node scripts/verify-bold-toggle-and-import.cjs && node scripts/verify-import-export-fidelity.cjs && node scripts/test-import-pagination.cjs && node scripts/verify-full-toolbar-layout.cjs && node scripts/verify-word-export-fidelity.cjs && node scripts/verify-ruler-table-print-fixes.cjs && node scripts/verify-ckeditor-ebys-shim.cjs && node scripts/verify-isolated-print.cjs && node scripts/verify-indent-outdent.cjs && node scripts/verify-2025-regulation-standards.cjs && node scripts/verify-free-line-spacing.cjs && node scripts/verify-ruler-line-alignment.cjs",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "editor",
+    "wysiwyg",
+    "word-editor",
+    "a4",
+    "ckeditor-replacement",
+    "kendo-ui",
+    "kendo-editor",
+    "ebys",
+    "resmi-yazi",
+    "docx",
+    "rich-text",
+    "openxml"
+  ],
+  "author": "changothramayodhya@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jsdom": "^30.0.0",
+    "esbuild": "^0.25.0",
+    "jsdom": "^29.1.1",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0"
+  },
+  "dependencies": {
+    "mammoth": "^1.13.0"
+  }
+}
