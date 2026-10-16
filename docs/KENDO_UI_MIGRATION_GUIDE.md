@@ -389,6 +389,6 @@ function prepareForElectronicSignature() {
 
 ## 📞 Destek ve Katkı
 
-- **GitHub Repository:** [https://github.com/changothramayodhya/oldstyle-web-texteditor](https://github.com/changothramayodhya/oldstyle-web-texteditor)
+- **GitHub Repository:** [https://github.com/texteditor-admin/oldstyle-web-texteditor](https://github.com/texteditor-admin/oldstyle-web-texteditor)
 - **E-Posta:** `changothramayodhya@gmail.com`
 - **Lisans:** MIT (Tüm kamu, özel sektör ve açık kaynak projelerinde ticari ve serbest kullanım garantisi).

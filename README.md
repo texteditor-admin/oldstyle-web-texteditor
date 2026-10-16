@@ -258,5 +258,5 @@ Bu proje **MIT Lisansı** ile lisanslanmıştır. Kamu kurumları, belediyeler, 
 
 ## 👤 İletişim & Katkı
 
-- **GitHub Repository:** [https://github.com/changothramayodhya/oldstyle-web-texteditor](https://github.com/changothramayodhya/oldstyle-web-texteditor)
+- **GitHub Repository:** [https://github.com/texteditor-admin/oldstyle-web-texteditor](https://github.com/texteditor-admin/oldstyle-web-texteditor)
 - **Geliştirici & İletişim:** `changothramayodhya@gmail.com`
